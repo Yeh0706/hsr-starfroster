@@ -1,0 +1,11 @@
+# build output (upload Starfroster.zip to GitHub Releases instead)
+dist/
+build/
+*.spec
+
+# Python
+__pycache__/
+*.pyc
+
+# personal working notes (contain local paths)
+重點紀錄.md
