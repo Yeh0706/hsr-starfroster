@@ -70,6 +70,10 @@ class SettingsPage(Page):
         self.about = PushSettingCard(tr("open_data_folder"), FIF.INFO, tr("about"), "", g)
         self.about.clicked.connect(self.open_data)
         g.addSettingCard(self.about)
+        from .. import __version__
+        upd = PushSettingCard(tr("check_update"), FIF.UPDATE, tr("app_update"), tr("app_version_now", __version__), g)
+        upd.clicked.connect(lambda: self.window().check_app_update(manual=True))
+        g.addSettingCard(upd)
         g.addSettingCard(HyperlinkCard(REPO_URL, "GitHub", FIF.GITHUB, "Starfroster", tr("repo_desc"), g))
         g.addSettingCard(HyperlinkCard("https://hsr.nanoka.cc", "nanoka.cc", FIF.LINK, "nanoka.cc",
                                        "Character names & icons", g))

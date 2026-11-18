@@ -103,6 +103,10 @@ _ZH = {
     "clear_icons": "已清除图标缓存", "icon_cache": "图标缓存", "clear": "清除", "grp_about": "关于", "about": "关于",
     "about_desc": "Starfroster v{1} · ppSR persistent.json 编辑器 · 数据文件夹：{0}",
     "repo_desc": "源代码、问题回报与更新",
+    "app_update": "程序更新", "app_version_now": "当前版本 v{0}",
+    "app_update_title": "发现新版本 v{0}",
+    "app_update_body": "目前版本 v{0}，最新版本 v{1}。\n下载新的 Starfroster.zip，解压后覆盖原来的文件夹即可（设定与收藏不会受影响）。",
+    "app_update_download": "前往下载", "later": "稍后", "app_update_failed": "检查更新失败",
     "open_data_folder": "打开数据文件夹",
 }
 
@@ -192,6 +196,10 @@ _EN = {
     "about": "About",
     "about_desc": "Starfroster v{1} · ppSR persistent.json editor · data folder: {0}",
     "repo_desc": "Source code, issues and updates",
+    "app_update": "App update", "app_version_now": "Current version v{0}",
+    "app_update_title": "New version v{0} available",
+    "app_update_body": "You have v{0}; the latest is v{1}.\nDownload the new Starfroster.zip, extract it and replace the old folder (settings and favorites are kept).",
+    "app_update_download": "Go to download", "later": "Later", "app_update_failed": "Could not check for updates",
     "open_data_folder": "Open data folder",
 }
 

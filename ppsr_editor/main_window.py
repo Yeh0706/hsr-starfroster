@@ -179,6 +179,37 @@ class MainWindow(FluentWindow):
             self.update_chars(manual=False)
         if not self.state.scenes.loaded:
             self.update_maps(manual=False)
+        if not os.environ.get("PPSR_EDITOR_NO_UPDATE_CHECK"):
+            QTimer.singleShot(1500, lambda: self.check_app_update(manual=False))
+
+    # ------------------------------------------------------------ app update (notify only)
+    def check_app_update(self, manual=True):
+        from . import updater
+
+        def done(ok, res):
+            if not ok:
+                if manual:
+                    InfoBar.error(tr("app_update_failed"), str(res), duration=5000, parent=self,
+                                  position=InfoBarPosition.TOP)
+                return
+            if not res["newer"]:
+                if manual:
+                    InfoBar.success(tr("up_to_date"), tr("app_version_now", updater.__version__), duration=3000,
+                                    parent=self, position=InfoBarPosition.TOP)
+                return
+            notes = res["notes"]
+            if len(notes) > 600:
+                notes = notes[:600].rstrip() + "…"
+            box = MessageBox(tr("app_update_title", res["version"]),
+                             tr("app_update_body", updater.__version__, res["version"]) + ("\n\n" + notes if notes else ""),
+                             self)
+            box.yesButton.setText(tr("app_update_download"))
+            box.cancelButton.setText(tr("later"))
+            if box.exec():
+                from PySide6.QtCore import QUrl
+                from PySide6.QtGui import QDesktopServices
+                QDesktopServices.openUrl(QUrl(res["url"]))
+        self.bridge.run(updater.check_latest, done)
 
     def first_run(self) -> bool:
         """First launch: ask for persistent.json. Returns True if the editor is relaunching."""

@@ -10,11 +10,32 @@ from datetime import datetime
 from pathlib import Path
 
 DEFAULT_MISC = Path(r"C:\StarRail Beta\ppSR_REL_4.7.5X\misc")
-MAX_BACKUPS = 30
 
-# 設定檔放在 %APPDATA%（不受「受控資料夾存取」影響），可用環境變數覆寫（測試用）
-SETTINGS_FILE = Path(os.environ.get("PPSR_EDITOR_SETTINGS")
-                     or Path(os.environ.get("APPDATA", Path.home())) / "ppSR-persistent-editor" / "settings.json")
+# Windows 慣例：使用者資料放 %APPDATA%（Roaming），可重新下載的快取放 %LOCALAPPDATA%（Local）。
+# 兩者都不受「受控資料夾存取」影響。環境變數可覆寫（測試用）。
+_APPDATA = Path(os.environ.get("APPDATA") or Path.home() / "AppData" / "Roaming")
+_LOCALAPPDATA = Path(os.environ.get("LOCALAPPDATA") or Path.home() / "AppData" / "Local")
+USER_DIR = Path(os.environ.get("PPSR_EDITOR_USER_DIR") or _APPDATA / "Starfroster")
+CACHE_DIR = Path(os.environ.get("PPSR_EDITOR_CACHE_DIR") or _LOCALAPPDATA / "Starfroster" / "cache")
+SETTINGS_FILE = Path(os.environ.get("PPSR_EDITOR_SETTINGS") or USER_DIR / "settings.json")
+
+# 舊版位置（只會被複製過來，不會刪除）
+LEGACY_SETTINGS = _APPDATA / "ppSR-persistent-editor" / "settings.json"
+LEGACY_DATA_DIRNAME = "persistent編輯器資料"
+
+
+def copy_if_missing(src: Path, dst: Path):
+    """Copy a file, or the files of a folder, from an old location unless the new one already has them."""
+    try:
+        if src.is_file() and not dst.exists():
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(src, dst)
+        elif src.is_dir():
+            for f in src.rglob("*"):
+                if f.is_file():
+                    copy_if_missing(f, dst / f.relative_to(src))
+    except OSError:
+        pass        # 搬不過去就算了，新位置會重新建立／重新下載
 
 
 def read_json(path: Path, default=None):
@@ -37,6 +58,8 @@ class Settings:
     DEFAULTS = {"misc_path": str(DEFAULT_MISC), "theme": "dark", "language": "zh", "configured": False}
 
     def __init__(self):
+        if not os.environ.get("PPSR_EDITOR_SETTINGS"):
+            copy_if_missing(LEGACY_SETTINGS, SETTINGS_FILE)
         self.data = dict(self.DEFAULTS)
         self.data.update(read_json(SETTINGS_FILE, {}) or {})
         env_misc = os.environ.get("PPSR_EDITOR_MISC")
@@ -59,14 +82,26 @@ class Paths:
         self.excel = self.misc / "resources" / "Excel"
         self.root = self.misc.parent                     # ppsr.exe 所在
         self.ppsr_exe = self.root / "ppsr.exe"
-        self.data = self.root / "persistent編輯器資料"     # 「文件」資料夾可能被擋寫入，放遊戲旁
-        self.names = self.data / "角色名稱.json"
-        self.favorites = self.data / "收藏地圖.json"
-        self.cache = self.data / "資源"
-        self.icons = self.cache / "icons"
+        self.data = USER_DIR                             # 使用者資料（自訂名稱、收藏）
+        self.names = USER_DIR / "names.json"
+        self.favorites = USER_DIR / "favorites.json"
+        self.cache = CACHE_DIR                           # 角色／地圖資料、圖示
+        self.icons = CACHE_DIR / "icons"
 
     def valid(self) -> bool:
         return self.persistent.exists()
+
+    def migrate_legacy(self):
+        """Copy data from the old folder next to ppSR (v1.0.0). The old folder is left untouched."""
+        old = self.root / LEGACY_DATA_DIRNAME
+        if not old.is_dir():
+            return
+        copy_if_missing(old / "角色名稱.json", self.names)
+        copy_if_missing(old / "收藏地圖.json", self.favorites)
+        res = old / "資源"
+        for name in ("characters.json", "characters_meta.json", "scenes.json"):
+            copy_if_missing(res / name, self.cache / name)
+        copy_if_missing(res / "icons", self.icons)
 
 
 # ---------------------------------------------------------------- persistent.json

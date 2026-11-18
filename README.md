@@ -40,6 +40,7 @@ Starfroster 是給 **ppSR** 使用的設定編輯器，用圖形介面修改 `mi
   - 存檔保留原本的換行格式
   - 介面語言：简体中文／English；預設深色主題（可改淺色或跟隨系統），強調色跟隨 Windows 輔色
   - 可在設定頁建立桌面／開始功能表捷徑
+  - 開啟時檢查 GitHub 上有沒有新版本，有的話會提示並附下載連結
 
 `global_passive`、`buff`、`send_hotfix`、`key`、`leader` 這些欄位不會出現在介面上，存檔時會原樣保留。
 
@@ -52,12 +53,14 @@ Starfroster 是給 **ppSR** 使用的設定編輯器，用圖形介面修改 `mi
 
 > Windows Defender 可能會跳出警告，這是 PyInstaller 打包程式常見的誤判。按「其他資訊」→「仍要執行」即可。
 
+**更新**：有新版本時，開啟程式會跳出提示。下載新的 `Starfroster.zip`，解壓縮後覆蓋原來的資料夾即可，設定和收藏不會受影響。
+
 ### 資料存放位置
 
 | 內容 | 位置 |
 |---|---|
-| 設定（語言、主題、檔案路徑） | `%APPDATA%\ppSR-persistent-editor\settings.json` |
-| 自訂角色名稱、收藏地圖、資源快取 | ppSR 資料夾旁的 `persistent編輯器資料\` |
+| 設定、自訂角色名稱、收藏地圖 | `%APPDATA%\Starfroster\`（`settings.json`、`names.json`、`favorites.json`） |
+| 快取：角色／地圖資料、圖示（可隨時刪除，會重新下載） | `%LOCALAPPDATA%\Starfroster\cache\` |
 
 ### 從原始碼執行
 
@@ -97,6 +100,7 @@ Starfroster is a settings editor for **ppSR**. It edits `misc\persistent.json` t
   - Saves keep the original line endings
   - UI language: Simplified Chinese / English; dark theme by default (light or system also available), accent color follows Windows
   - Create Desktop / Start menu shortcuts from Settings
+  - Checks GitHub for a new version on launch and shows a download link when one is available
 
 Fields with no UI (`global_passive`, `buff`, `send_hotfix`, `key`, `leader`) are kept exactly as they are when saving.
 
@@ -109,12 +113,14 @@ Fields with no UI (`global_passive`, `buff`, `send_hotfix`, `key`, `leader`) are
 
 > Windows Defender may show a warning. This is a common false positive for PyInstaller apps. Click "More info" → "Run anyway".
 
+**Updating**: when a new version is out, the app tells you on launch. Download the new `Starfroster.zip`, extract it and replace the old folder; settings and favorites are kept.
+
 ### Where data is stored
 
 | What | Where |
 |---|---|
-| Settings (language, theme, file path) | `%APPDATA%\ppSR-persistent-editor\settings.json` |
-| Custom names, favorite maps, resource cache | `persistent編輯器資料\` next to the ppSR folder |
+| Settings, custom names, favorite maps | `%APPDATA%\Starfroster\` (`settings.json`, `names.json`, `favorites.json`) |
+| Cache: character / map data, icons (safe to delete, re-downloaded) | `%LOCALAPPDATA%\Starfroster\cache\` |
 
 ### Run from source
 

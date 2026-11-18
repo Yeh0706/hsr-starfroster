@@ -21,6 +21,7 @@ class AppState(QObject):
         super().__init__()
         self.settings = settings
         self.paths = Paths(settings["misc_path"])
+        self.paths.migrate_legacy()      # 舊版資料夾 → AppData（只複製，不刪舊的）
         self.pf = PersistentFile(self.paths)
         self.names = JsonStore(self.paths.names, {})
         self.favorites = JsonStore(self.paths.favorites, [])
