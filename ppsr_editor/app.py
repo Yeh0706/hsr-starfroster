@@ -29,7 +29,7 @@ def main():
     if icon.exists():
         app.setWindowIcon(QIcon(str(icon)))
 
-    from qfluentwidgets import setTheme, Theme, setThemeColor
+    from qfluentwidgets import setTheme, Theme, setThemeColor   # 字型一律用預設的 Segoe UI＋微軟雅黑
     setTheme({"auto": Theme.AUTO, "light": Theme.LIGHT, "dark": Theme.DARK}.get(settings["theme"], Theme.AUTO))
     try:
         from qframelesswindow.utils import getSystemAccentColor

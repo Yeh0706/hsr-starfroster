@@ -1,7 +1,7 @@
 # Build Starfroster with PyInstaller (folder version).
 # Builds in %TEMP% (Python may not write into Documents because of Controlled Folder Access),
 # trims unused Qt files, then copies the result to .\dist\Starfroster
-# Usage:  powershell -ExecutionPolicy Bypass -File .\打包.ps1
+# Usage:  powershell -ExecutionPolicy Bypass -File .\build.ps1
 
 $ErrorActionPreference = "Stop"
 $proj  = $PSScriptRoot
@@ -22,6 +22,7 @@ python -m PyInstaller --noconfirm --clean --windowed --name Starfroster `
   --add-data "$proj\assets;assets" `
   --paths "$proj" `
   --collect-data qfluentwidgets `
+  --collect-data opencc `
   @excludes `
   --distpath "$tmp\dist" --workpath "$tmp\work" --specpath "$tmp" `
   "$entry"

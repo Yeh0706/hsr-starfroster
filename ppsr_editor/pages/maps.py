@@ -3,7 +3,7 @@ from __future__ import annotations
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QFrame
 
-from qfluentwidgets import (SettingCard, SimpleCardWidget, FluentIcon as FIF, SegmentedWidget, SearchLineEdit,
+from qfluentwidgets import (SettingCard, SimpleCardWidget, FluentIcon as FIF, Pivot, SearchLineEdit,
                             StrongBodyLabel, CaptionLabel, BodyLabel, PushButton, PrimaryPushButton,
                             TransparentToolButton, CardWidget, InfoBar, InfoBarPosition, MessageBoxBase,
                             SubtitleLabel, IconWidget, ToolTipFilter, ToolTipPosition, themeColor)
@@ -212,9 +212,10 @@ class MapPage(Page):
 
         self.layout_.addSpacing(10)
         row = QHBoxLayout()
-        self.seg = SegmentedWidget(self.view)
+        self.seg = Pivot(self.view)            # 純文字＋底線的分頁（Win11 設定 App 樣式）
         for key in self.TABS:
             self.seg.addItem(key, tr("tab_" + key), lambda *_, k=key: self.set_tab(k))
+        self.seg.setItemFontSize(15)
         self.seg.setCurrentItem(self.tab)
         row.addWidget(self.seg)
         row.addStretch(1)

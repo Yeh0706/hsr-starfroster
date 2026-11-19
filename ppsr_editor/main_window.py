@@ -19,6 +19,7 @@ from .i18n import tr
 from .resources import update_characters, update_scenes
 from .pages.lineup import LineupPage
 from .pages.appearance import AppearancePage
+from .pages.effects import EffectsPage
 from .pages.maps import MapPage
 from .pages.advanced import AdvancedPage
 from .pages.settings_page import SettingsPage
@@ -112,12 +113,14 @@ class MainWindow(FluentWindow):
 
         self.lineup = LineupPage(state, self)
         self.appearance = AppearancePage(state, self)
+        self.effects = EffectsPage(state, self)
         self.maps = MapPage(state, self.restart_ppsr, lambda: self.update_maps(manual=True), self)
         self.advanced = AdvancedPage(state, self)
         self.settings = SettingsPage(state, lambda: self.update_maps(manual=True),
                                      lambda: self.update_chars(manual=True), self.relaunch, self)
         self.addSubInterface(self.lineup, FIF.PEOPLE, tr("nav_lineup"))
         self.addSubInterface(self.appearance, FIF.PALETTE, tr("nav_appearance"))
+        self.addSubInterface(self.effects, FIF.CERTIFICATE, tr("nav_effects"))
         self.addSubInterface(self.maps, FIF.GLOBE, tr("nav_map"))
         self.addSubInterface(self.advanced, FIF.DEVELOPER_TOOLS, tr("nav_advanced"))
         self.addSubInterface(self.settings, FIF.SETTING, tr("nav_settings"), NavigationItemPosition.BOTTOM)
@@ -373,6 +376,7 @@ class MainWindow(FluentWindow):
             else:                                  # python <script>.pyw ...
                 QProcess.startDetached(sys.executable, sys.argv)
             self._force_close = True
+            self.close()                           # closeEvent stops the background workers
             QApplication.quit()
 
     def confirm_close(self) -> bool:

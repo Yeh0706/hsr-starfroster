@@ -29,27 +29,28 @@ Starfroster 是給 **ppSR** 使用的設定編輯器，用圖形介面修改 `mi
 - **角色外觀**
   - 開拓者性別、命途（只列出遊戲裡真的有的命途），以及三月七命途；頭像會跟著命途切換
   - 皮膚：一個角色一行，用下拉選單選「預設」或皮膚，頭像會換成皮膚頭像
+- **專屬效果**：遐蝶「月繭之庇」、銀狼LV.999「999安全衛士」、星神★阿哈「阿哈時刻在」的開關（對應 `global_passive`）
 - **切換地圖**
   - 戰鬥（擬造花萼）／探索／測試服／我的收藏
   - 依世界分組、可搜尋；顯示目前位置，可以收藏
-  - 傳送後一鍵「儲存並重啟 ppsr」
+  - 傳送後一鍵「儲存並重啟 ppSR」
 - **進階**：有語法上色和格式檢查的原始 JSON 編輯器
 - **其他**
-  - 標題列顯示 ppsr 是否在執行，可一鍵重啟 ppsr
+  - 標題列顯示 ppSR 是否在執行，可一鍵重啟 ppSR
   - 偵測檔案被外部修改
   - 存檔保留原本的換行格式
-  - 介面語言：简体中文／English；預設深色主題（可改淺色或跟隨系統），強調色跟隨 Windows 輔色
+  - 介面語言：繁體中文／简体中文／English；預設深色主題（可改淺色或跟隨系統），強調色跟隨 Windows 輔色
   - 可在設定頁建立桌面／開始功能表捷徑
   - 開啟時檢查 GitHub 上有沒有新版本，有的話會提示並附下載連結
 
-`global_passive`、`buff`、`send_hotfix`、`key`、`leader` 這些欄位不會出現在介面上，存檔時會原樣保留。
+`buff`、`send_hotfix`、`key`、`leader` 這些欄位不會出現在介面上，存檔時會原樣保留。
 
 ### 安裝與使用
 
 1. 到 [Releases](https://github.com/Yeh0706/hsr-starfroster/releases) 下載 `Starfroster.zip`。
 2. **先解壓縮**，再執行資料夾裡的 `Starfroster.exe`。`_internal` 資料夾必須跟 exe 放在一起。
 3. 第一次開啟時，選擇 ppSR 的 `persistent.json`，通常在 `ppSR_REL_x.x.x\misc\persistent.json`。
-4. 改完按「儲存」或 `Ctrl+S`。`persistent.json` 只會在 ppsr 啟動時讀取，所以要按標題列的「重啟 ppsr」，再重新登入遊戲。
+4. 改完按「儲存」或 `Ctrl+S`。`persistent.json` 只會在 ppSR 啟動時讀取，所以要按標題列的「重啟 ppSR」，再重新登入遊戲。
 
 > Windows Defender 可能會跳出警告，這是 PyInstaller 打包程式常見的誤判。按「其他資訊」→「仍要執行」即可。
 
@@ -68,7 +69,7 @@ Starfroster 是給 **ppSR** 使用的設定編輯器，用圖形介面修改 `mi
 
 ```bash
 pip install -r requirements.txt
-pythonw 啟動編輯器.pyw
+pythonw Starfroster.pyw
 ```
 
 ---
@@ -89,27 +90,28 @@ Starfroster is a settings editor for **ppSR**. It edits `misc\persistent.json` t
 - **Appearance**
   - Trailblazer gender and path (only paths that exist in the game data), and March 7th's path; the portrait follows the chosen path
   - Skins: one row per character with a "Default / skin" drop-down; the portrait switches to the skin's icon
+- **Exclusive effects**: on/off switches for Castorice's "Sanctuary of Mooncocoon", Silver Wolf LV.999's "McAwolfee 999" and Aeon ★ Aha's "Aha Instant Incoming" (`global_passive`)
 - **Teleport**
   - Combat (Calyx) / Explore / Beta server / Favorites
   - Grouped by world and searchable; shows the current location, which you can add to favorites
   - "Save and restart ppsr" right after teleporting
 - **Advanced**: raw JSON editor with syntax colors and validation
 - **Other**
-  - ppsr running status in the title bar and a one-click ppsr restart
+  - ppSR running status in the title bar and a one-click ppSR restart
   - Detects changes made to the file outside the editor
   - Saves keep the original line endings
-  - UI language: Simplified Chinese / English; dark theme by default (light or system also available), accent color follows Windows
+  - UI language: Traditional Chinese / Simplified Chinese / English; dark theme by default (light or system also available), accent color follows Windows
   - Create Desktop / Start menu shortcuts from Settings
   - Checks GitHub for a new version on launch and shows a download link when one is available
 
-Fields with no UI (`global_passive`, `buff`, `send_hotfix`, `key`, `leader`) are kept exactly as they are when saving.
+Fields with no UI (`buff`, `send_hotfix`, `key`, `leader`) are kept exactly as they are when saving.
 
 ### Install & use
 
 1. Download `Starfroster.zip` from [Releases](https://github.com/Yeh0706/hsr-starfroster/releases).
 2. **Extract it first**, then run `Starfroster.exe`. Keep the `_internal` folder next to the exe.
 3. On first launch, choose ppSR's `persistent.json`, usually `ppSR_REL_x.x.x\misc\persistent.json`.
-4. Click Save or press `Ctrl+S`. ppsr only reads `persistent.json` when it starts, so click "Restart ppsr" in the title bar and log in to the game again.
+4. Click Save or press `Ctrl+S`. ppSR only reads `persistent.json` when it starts, so click "Restart ppSR" in the title bar and log in to the game again.
 
 > Windows Defender may show a warning. This is a common false positive for PyInstaller apps. Click "More info" → "Run anyway".
 
@@ -128,7 +130,7 @@ Requires Python 3.10+ on Windows:
 
 ```bash
 pip install -r requirements.txt
-pythonw 啟動編輯器.pyw
+pythonw Starfroster.pyw
 ```
 
 ---
@@ -142,6 +144,7 @@ pythonw 啟動編輯器.pyw
 | 皮膚頭像 Skin icons | [alioth.wiki](https://alioth.wiki) |
 | 地圖資料 Map data (`scenes.json`) | [CAtlas0784/Escape-penacony](https://github.com/CAtlas0784/Escape-penacony) |
 | 介面元件 UI components | [PySide6](https://doc.qt.io/qtforpython-6/) · [QFluentWidgets](https://github.com/zhiyiYo/PyQt-Fluent-Widgets) |
+| 簡繁轉換 Chinese conversion | [OpenCC](https://github.com/BYVoid/OpenCC)（[opencc-python-reimplemented](https://github.com/yichen0831/opencc-python)） |
 
 資料與圖片會在執行時下載並快取在本機，本倉庫不包含任何遊戲素材。
 Data and images are downloaded and cached locally at runtime; this repository contains no game assets.

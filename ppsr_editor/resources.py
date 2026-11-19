@@ -131,13 +131,14 @@ class Catalog:
         rem = self.remote.get(str(aid))
         a = self.by_id.get(aid, {})
         if rem:
-            name = _TAG_RE.sub("", rem.get(i18n.LANG, "") or rem.get("en", ""))
+            zh = i18n.is_zh()
+            name = _TAG_RE.sub("", (rem.get("zh") if zh else rem.get("en")) or rem.get("en", ""))
             if "{NICKNAME}" in name or not name:
-                who = ("穹" if aid % 2 else "星") if i18n.LANG == "zh" else ("Caelus" if aid % 2 else "Stelle")
-                tb = "开拓者" if i18n.LANG == "zh" else "Trailblazer"
-                return f"{tb}·{i18n.path_name(a.get('base', ''))}（{who}）" if i18n.LANG == "zh" \
+                who = ("穹" if aid % 2 else "星") if zh else ("Caelus" if aid % 2 else "Stelle")
+                tb = i18n.zh_text("开拓者") if zh else "Trailblazer"
+                return f"{tb}·{i18n.path_name(a.get('base', ''))}（{who}）" if zh \
                     else f"{tb} · {i18n.path_name(a.get('base', ''))} ({who})"
-            return name
+            return i18n.zh_text(name) if zh else name
         return a.get("tag") or str(aid)
 
     def name(self, aid: int) -> str:
@@ -197,16 +198,21 @@ class Scenes:
         return (self.raw or {}).get("version", "?"), (self.raw or {}).get("updated_at", "?")
 
     @staticmethod
+    def _pick(obj: dict, key: str, default="") -> str:
+        zh = obj.get(key + "_zh") if i18n.is_zh() else None
+        return i18n.zh_text(zh) if zh else obj.get(key, default)
+
+    @staticmethod
     def name(obj: dict) -> str:
-        return (obj.get("name_zh") if i18n.LANG == "zh" else None) or obj.get("name", "?")
+        return Scenes._pick(obj, "name", "?")
 
     @staticmethod
     def desc(obj: dict) -> str:
-        return (obj.get("desc_zh") if i18n.LANG == "zh" else None) or obj.get("desc", "")
+        return Scenes._pick(obj, "desc")
 
     @staticmethod
     def notice(obj: dict) -> str:
-        return (obj.get("beta_notice_zh") if i18n.LANG == "zh" else None) or obj.get("beta_notice", "")
+        return Scenes._pick(obj, "beta_notice")
 
     def all(self):
         for w in self.worlds:

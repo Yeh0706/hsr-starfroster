@@ -3,7 +3,7 @@ from __future__ import annotations
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QStackedWidget
 
-from qfluentwidgets import (SettingCardGroup, SettingCard, ComboBox, FluentIcon as FIF, SegmentedWidget,
+from qfluentwidgets import (SettingCardGroup, SettingCard, ComboBox, FluentIcon as FIF, Pivot,
                             CardWidget, StrongBodyLabel, CaptionLabel, TransparentToolButton, PushButton,
                             RoundMenu, Action, ToolTipFilter, ToolTipPosition, DropDownPushButton, InfoBar,
                             themeColor)
@@ -93,7 +93,7 @@ class AppearancePage(Page):
     def __init__(self, state, parent=None):
         super().__init__("appearancePage", tr("appearance_title"), parent)
         self.state = state
-        self.seg = SegmentedWidget(self.view)
+        self.seg = Pivot(self.view)            # 純文字＋底線的分頁（Win11 設定 App 樣式）
         self.stack = FitStack(self.view)
         self.tb_host = QWidget()
         self.tb_lay = QVBoxLayout(self.tb_host)
@@ -105,6 +105,7 @@ class AppearancePage(Page):
         for key, text, w in (("tb", tr("tab_tb"), self.tb_host), ("skin", tr("tab_skin"), self.skin_host)):
             self.stack.addWidget(w)
             self.seg.addItem(key, text, lambda *_, w=w: self.stack.setCurrentWidget(w))
+        self.seg.setItemFontSize(15)
         self.seg.setCurrentItem("tb")
         hl = QHBoxLayout()
         hl.addWidget(self.seg)
@@ -212,8 +213,6 @@ class AppearancePage(Page):
         menu.addAction(other)
         self.add_btn.setMenu(menu)
         top.addWidget(self.add_btn)
-        top.addSpacing(12)
-        top.addWidget(CaptionLabel(tr("skin_hint")))
         top.addStretch(1)
         self.skin_lay.addLayout(top)
         if not skins:

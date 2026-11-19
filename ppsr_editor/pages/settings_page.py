@@ -9,7 +9,7 @@ from qfluentwidgets import (SettingCardGroup, SettingCard, PushSettingCard, Flue
                             InfoBar, InfoBarPosition, HyperlinkCard, setTheme, Theme)
 
 from .. import REPO_URL
-from ..i18n import tr
+from ..i18n import tr, LANGUAGES
 from ..widgets import Page
 from .appearance import ComboCard
 
@@ -51,7 +51,7 @@ class SettingsPage(Page):
                                    [(tr("theme_auto"), "auto", None), (tr("theme_light"), "light", None),
                                     (tr("theme_dark"), "dark", None)], s["theme"], self.set_theme, g))
         g.addSettingCard(ComboCard(FIF.LANGUAGE, tr("language"), tr("language_desc"),
-                                   [("简体中文", "zh", None), ("English", "en", None)], s["language"],
+                                   [(name, code, None) for code, name in LANGUAGES], s["language"],
                                    self.set_lang, g))
         self.add(g)
 
@@ -74,11 +74,12 @@ class SettingsPage(Page):
         upd = PushSettingCard(tr("check_update"), FIF.UPDATE, tr("app_update"), tr("app_version_now", __version__), g)
         upd.clicked.connect(lambda: self.window().check_app_update(manual=True))
         g.addSettingCard(upd)
+        # 兩個 GitHub 在前，nanoka 在後
         g.addSettingCard(HyperlinkCard(REPO_URL, "GitHub", FIF.GITHUB, "Starfroster", tr("repo_desc"), g))
-        g.addSettingCard(HyperlinkCard("https://hsr.nanoka.cc", "nanoka.cc", FIF.LINK, "nanoka.cc",
-                                       "Character names & icons", g))
         g.addSettingCard(HyperlinkCard("https://github.com/CAtlas0784/Escape-penacony", "GitHub", FIF.GITHUB,
-                                       "Escape-penacony", "Map data (scenes.json)", g))
+                                       "Escape-penacony", tr("src_maps"), g))
+        g.addSettingCard(HyperlinkCard("https://hsr.nanoka.cc", "nanoka.cc", FIF.LINK, "nanoka.cc",
+                                       tr("src_chars"), g))
         self.add(g)
         self.layout_.addStretch(1)
 
@@ -127,8 +128,24 @@ class SettingsPage(Page):
     def set_lang(self, v):
         if v != self.state.settings["language"]:
             self.state.settings["language"] = v
-            InfoBar.info(tr("language"), tr("language_restart"), duration=4000, parent=self.window(),
-                         position=InfoBarPosition.TOP)
+            from PySide6.QtCore import QTimer
+            QTimer.singleShot(0, lambda: self.ask_restart(v))   # 等下拉選單關閉後再問
+
+    def ask_restart(self, lang):
+        from qfluentwidgets import MessageBox
+        from .. import i18n
+        old = i18n.LANG
+        i18n.set_language(lang)            # 用「新」語言顯示這個詢問
+        title, body = tr("language_restart_title"), tr("language_restart_body")
+        yes, later, info = tr("restart_now_app"), tr("later"), tr("language_restart")
+        i18n.set_language(old)
+        box = MessageBox(title, body, self.window())
+        box.yesButton.setText(yes)
+        box.cancelButton.setText(later)
+        if box.exec():
+            self.window().relaunch()       # 有未儲存的修改時，relaunch 會先問要不要儲存
+        else:
+            InfoBar.info(tr("language"), info, duration=4000, parent=self.window(), position=InfoBarPosition.TOP)
 
     def clear_icons(self):
         self.state.icons.clear()

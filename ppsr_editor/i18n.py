@@ -21,14 +21,14 @@ _ZH = {
     "save_failed": "保存失败", "error": "错误", "default": "默认", "unknown": "未知",
     "loading": "加载中…", "downloading": "下载中…", "download_failed": "下载失败", "done": "完成",
     # ppsr
-    "ppsr_running": "ppsr 运行中", "ppsr_stopped": "ppsr 未运行", "ppsr_restart": "重启 ppsr",
-    "ppsr_restart_title": "重启 ppsr？",
+    "ppsr_running": "ppSR 运行中", "ppsr_stopped": "ppSR 未运行", "ppsr_restart": "重启 ppSR",
+    "ppsr_restart_title": "重启 ppSR？",
     "ppsr_restart_body": "将关闭正在运行的 ppsr.exe 并重新启动。游戏需要重新登录。",
     "ppsr_unsaved_title": "有未保存的修改",
-    "ppsr_unsaved_body": "persistent.json 只在 ppsr 启动时读取一次。要先保存再重启吗？",
+    "ppsr_unsaved_body": "persistent.json 只在 ppSR 启动时读取一次。要先保存再重启吗？",
     "save_and_restart": "保存并重启", "restart_without_save": "不保存，直接重启",
-    "ppsr_restarted": "ppsr 已重启，请重新登录游戏", "ppsr_not_found": "找不到 ppsr.exe：{0}",
-    "ppsr_restart_failed": "重启 ppsr 失败",
+    "ppsr_restarted": "ppSR 已重启，请重新登录游戏", "ppsr_not_found": "找不到 ppsr.exe：{0}",
+    "ppsr_restart_failed": "重启 ppSR 失败",
     # file watching
     "file_changed_title": "文件已被外部修改",
     "file_changed_body": "persistent.json 在编辑器外被修改了。要重新读取吗？（会放弃你未保存的修改）",
@@ -58,11 +58,11 @@ _ZH = {
     "skin_hint": "选择「默认」等于 0",
     # map
     "map_title": "切换地图", "map_current": "当前位置", "map_unknown_place": "不在地图列表中",
-    "map_add_fav": "收藏", "tab_explore": "探索", "tab_combat": "战斗（拟造花萼）", "tab_beta": "测试服",
+    "map_add_fav": "收藏", "tab_explore": "探索", "tab_combat": "战斗", "tab_beta": "测试服",
     "tab_fav": "我的收藏", "teleport": "传送", "map_search": "搜索地图",
     "tag_calyx": "可打花萼", "tag_beta": "测试服", "map_count": "{0} 个地图",
     "map_no_data": "还没有地图数据", "map_download": "下载地图数据",
-    "teleported": "已设置为「{0}」，保存并重启 ppsr 后生效", "restart_now": "保存并重启",
+    "teleported": "已设置为「{0}」，保存并重启 ppSR 后生效", "restart_now": "保存并重启",
     "fav_empty": "还没有收藏。可以在「当前位置」收藏目前的地点。",
     "fav_name_title": "收藏名称", "fav_default_name": "收藏 {0}",
     "fav_before_title": "当前位置还没有收藏",
@@ -94,7 +94,9 @@ _ZH = {
     "choose_folder": "选择文件夹", "misc_invalid": "这个文件夹里没有 persistent.json",
     "grp_look": "个性化", "theme": "应用主题", "theme_desc": "浅色、深色或跟随系统",
     "theme_auto": "跟随系统", "theme_light": "浅色", "theme_dark": "深色",
-    "language": "语言", "language_desc": "重启编辑器后生效", "language_restart": "语言已更改，重启编辑器后生效",
+    "language": "语言", "language_desc": "切换后重新启动编辑器即可套用", "language_restart": "语言已更改，重启编辑器后生效",
+    "language_restart_title": "语言已更改", "language_restart_body": "要立即重新启动编辑器，套用新的语言吗？",
+    "restart_now_app": "立即重新启动",
     "grp_data": "数据", "map_data": "地图数据", "map_data_desc": "来源：Escape-penacony · 版本 {0} · 更新于 {1}",
     "map_data_none": "来源：Escape-penacony · 尚未下载",
     "char_data": "角色资源", "char_data_desc": "来源：nanoka.cc · 数据版本 {0} · {1} 个角色",
@@ -103,6 +105,10 @@ _ZH = {
     "clear_icons": "已清除图标缓存", "icon_cache": "图标缓存", "clear": "清除", "grp_about": "关于", "about": "关于",
     "about_desc": "Starfroster v{1} · ppSR persistent.json 编辑器 · 数据文件夹：{0}",
     "repo_desc": "源代码、问题回报与更新",
+    "nav_effects": "专属效果", "effects_title": "专属效果",
+    "effects_hint": "拥有该角色或队伍中有该角色时生效（对应 persistent.json 的 global_passive）。改完保存并重启 ppSR 才会生效。",
+    "on": "开", "off": "关",
+    "src_maps": "地图数据（scenes.json）", "src_chars": "角色名称与图标",
     "app_update": "程序更新", "app_version_now": "当前版本 v{0}",
     "app_update_title": "发现新版本 v{0}",
     "app_update_body": "目前版本 v{0}，最新版本 v{1}。\n下载新的 Starfroster.zip，解压后覆盖原来的文件夹即可（设定与收藏不会受影响）。",
@@ -119,14 +125,14 @@ _EN = {
     "unsaved": "You have unsaved changes", "saved": "Saved", "saved_backup": "Saved (backup: {0})",
     "save_failed": "Save failed", "error": "Error", "default": "Default", "unknown": "Unknown",
     "loading": "Loading…", "downloading": "Downloading…", "download_failed": "Download failed", "done": "Done",
-    "ppsr_running": "ppsr running", "ppsr_stopped": "ppsr stopped", "ppsr_restart": "Restart ppsr",
-    "ppsr_restart_title": "Restart ppsr?",
+    "ppsr_running": "ppSR running", "ppsr_stopped": "ppSR stopped", "ppsr_restart": "Restart ppSR",
+    "ppsr_restart_title": "Restart ppSR?",
     "ppsr_restart_body": "The running ppsr.exe will be closed and started again. You will need to log in to the game again.",
     "ppsr_unsaved_title": "Unsaved changes",
-    "ppsr_unsaved_body": "persistent.json is only read when ppsr starts. Save before restarting?",
+    "ppsr_unsaved_body": "persistent.json is only read when ppSR starts. Save before restarting?",
     "save_and_restart": "Save and restart", "restart_without_save": "Restart without saving",
-    "ppsr_restarted": "ppsr restarted. Log in to the game again.", "ppsr_not_found": "ppsr.exe not found: {0}",
-    "ppsr_restart_failed": "Failed to restart ppsr",
+    "ppsr_restarted": "ppSR restarted. Log in to the game again.", "ppsr_not_found": "ppsr.exe not found: {0}",
+    "ppsr_restart_failed": "Failed to restart ppSR",
     "file_changed_title": "File changed outside the editor",
     "file_changed_body": "persistent.json was modified outside the editor. Reload it? (Your unsaved changes will be lost.)",
     "reload": "Reload", "keep_mine": "Keep my changes",
@@ -151,11 +157,11 @@ _EN = {
     "skin_add": "Add skin", "skin_other": "Other character (enter ID)…", "skin_empty": "No skins set",
     "skin_id_title": "Character ID", "skin_value_custom": "Skin ID {0}", "skin_hint": "\"Default\" equals 0",
     "map_title": "Teleport", "map_current": "Current location", "map_unknown_place": "Not in the map list",
-    "map_add_fav": "Favorite", "tab_explore": "Explore", "tab_combat": "Combat (Calyx)", "tab_beta": "Beta server",
+    "map_add_fav": "Favorite", "tab_explore": "Explore", "tab_combat": "Combat", "tab_beta": "Beta server",
     "tab_fav": "Favorites", "teleport": "Teleport", "map_search": "Search maps",
     "tag_calyx": "Calyx", "tag_beta": "Beta", "map_count": "{0} maps",
     "map_no_data": "No map data yet", "map_download": "Download map data",
-    "teleported": "Set to \"{0}\". Save and restart ppsr to apply.", "restart_now": "Save and restart",
+    "teleported": "Set to \"{0}\". Save and restart ppSR to apply.", "restart_now": "Save and restart",
     "fav_empty": "No favorites yet. Save the current location from the card above.",
     "fav_name_title": "Favorite name", "fav_default_name": "Favorite {0}",
     "fav_before_title": "Current location is not saved",
@@ -185,8 +191,10 @@ _EN = {
     "choose_folder": "Choose folder", "misc_invalid": "This folder has no persistent.json",
     "grp_look": "Personalization", "theme": "App theme", "theme_desc": "Light, dark, or follow the system",
     "theme_auto": "Use system setting", "theme_light": "Light", "theme_dark": "Dark",
-    "language": "Language", "language_desc": "Takes effect after restarting the editor",
+    "language": "Language", "language_desc": "Restart the editor after switching to apply",
     "language_restart": "Language changed. Restart the editor to apply.",
+    "language_restart_title": "Language changed", "language_restart_body": "Restart the editor now to use the new language?",
+    "restart_now_app": "Restart now",
     "grp_data": "Data", "map_data": "Map data", "map_data_desc": "Source: Escape-penacony · version {0} · updated {1}",
     "map_data_none": "Source: Escape-penacony · not downloaded",
     "char_data": "Character resources", "char_data_desc": "Source: nanoka.cc · data {0} · {1} characters",
@@ -196,6 +204,10 @@ _EN = {
     "about": "About",
     "about_desc": "Starfroster v{1} · ppSR persistent.json editor · data folder: {0}",
     "repo_desc": "Source code, issues and updates",
+    "nav_effects": "Exclusive effects", "effects_title": "Exclusive effects",
+    "effects_hint": "Active when you own the character or have them in your team (global_passive in persistent.json). Save and restart ppSR to apply.",
+    "on": "On", "off": "Off",
+    "src_maps": "Map data (scenes.json)", "src_chars": "Character names & icons",
     "app_update": "App update", "app_version_now": "Current version v{0}",
     "app_update_title": "New version v{0} available",
     "app_update_body": "You have v{0}; the latest is v{1}.\nDownload the new Starfroster.zip, extract it and replace the old folder (settings and favorites are kept).",
@@ -206,11 +218,15 @@ _EN = {
 PATH_NAMES = {
     "zh": {"Destruction": "毁灭", "Hunt": "巡猎", "Erudition": "智识", "Harmony": "同谐", "Nihility": "虚无",
            "Preservation": "存护", "Abundance": "丰饶", "Remembrance": "记忆", "Elation": "欢愉"},
+    "zh_TW": {"Destruction": "毀滅", "Hunt": "巡獵", "Erudition": "智識", "Harmony": "同諧", "Nihility": "虛無",
+              "Preservation": "存護", "Abundance": "豐饒", "Remembrance": "記憶", "Elation": "歡愉"},
     "en": {p: p for p in PATHS},
 }
 ELEMENT_NAMES = {
     "zh": {"Physical": "物理", "Fire": "火", "Ice": "冰", "Thunder": "雷", "Wind": "风", "Quantum": "量子",
            "Imaginary": "虚数"},
+    "zh_TW": {"Physical": "物理", "Fire": "火", "Ice": "冰", "Thunder": "雷", "Wind": "風", "Quantum": "量子",
+              "Imaginary": "虛數"},
     "en": {"Physical": "Physical", "Fire": "Fire", "Ice": "Ice", "Thunder": "Lightning", "Wind": "Wind",
            "Quantum": "Quantum", "Imaginary": "Imaginary"},
 }
@@ -235,16 +251,67 @@ def skin_name(skin_id: int, fallback: str = "") -> str:
     n = SKIN_NAMES.get(int(skin_id))
     if not n:
         return fallback or str(skin_id)
-    return n[1] if LANG == "en" else n[0]
+    return n[1] if LANG == "en" else zh_text(n[0])
+
+
+LANGUAGES = [("zh", "简体中文"), ("zh_TW", "繁體中文"), ("en", "English")]
 
 
 def set_language(lang: str):
     global LANG
-    LANG = "en" if lang == "en" else "zh"
+    LANG = lang if lang in dict(LANGUAGES) else "zh"
+
+
+def is_zh() -> bool:
+    return LANG.startswith("zh")
+
+
+# ---------------------------------------------------------------- 繁體中文（由简中自動轉換）
+_CC: dict = {}
+_CACHE: dict = {}
+# 自動轉換不理想的地方，在這裡直接指定
+_ZHT_FIX = {
+    "shortcut": "建立捷徑", "shortcut_desc": "在桌面或開始功能表建立 Starfroster 的捷徑",
+    "shortcut_startmenu": "開始功能表", "shortcut_done": "已建立捷徑", "shortcut_failed": "建立捷徑失敗",
+    "json_apply": "套用", "json_applied": "已套用到編輯器，記得儲存", "json_hint": "修改後按「套用」，再儲存。",
+    "theme": "主題",
+}
+# 轉換後再修正成台灣慣用說法
+_ZHT_WORDS = [("資料資料夾", "資料夾"), ("當前", "目前"), ("自定義", "自訂"), ("隻影響", "只影響"),
+              ("解壓後", "解壓縮後"), ("個性化", "個人化"), ("高階", "進階")]
+
+
+def _convert(s: str, cfg: str) -> str:
+    if not s:
+        return s
+    key = (cfg, s)
+    if key not in _CACHE:
+        try:
+            if cfg not in _CC:
+                from opencc import OpenCC
+                _CC[cfg] = OpenCC(cfg)
+            _CACHE[key] = _CC[cfg].convert(s)
+        except Exception:            # OpenCC 不在時就顯示简中
+            _CACHE[key] = s
+    return _CACHE[key]
+
+
+def zh_text(s: str) -> str:
+    """Simplified-Chinese data text (names from nanoka / scenes.json) in the current Chinese variant."""
+    return _convert(s, "s2tw") if LANG == "zh_TW" else s
 
 
 def tr(key: str, *args) -> str:
-    s = (_EN if LANG == "en" else _ZH).get(key) or _ZH.get(key) or key
+    if LANG == "en":
+        s = _EN.get(key) or _ZH.get(key) or key
+    elif LANG == "zh_TW":
+        s = _ZHT_FIX.get(key)
+        if s is None:
+            s = _convert(_ZH.get(key) or _EN.get(key) or key, "s2twp")
+            for a, b in _ZHT_WORDS:
+                s = s.replace(a, b)
+    else:
+        s = _ZH.get(key) or key
     return s.format(*args) if args else s
 
 
