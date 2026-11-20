@@ -80,9 +80,14 @@ class Catalog:
         for i in sorted(ids):
             loc = self.local.get(i, {})
             rem = self.remote.get(str(i), {})
-            base = loc.get("path") or rem.get("baseType", "")
-            el = loc.get("element") or rem.get("damageType", "")
-            rarity = loc.get("rarity") or (5 if str(rem.get("rank", "")).endswith("5") else 4)
+            # 命途／屬性／星級以 nanoka 為準：ppSR 的 AvatarConfig 裡測試服角色常是佔位值
+            # （例如 1508/1509/1514 都標成巡獵、1503 標成 4 星），nanoka 沒有資料時才用本機的
+            base = rem.get("baseType") or loc.get("path", "")
+            el = rem.get("damageType") or loc.get("element", "")
+            if rem.get("rank"):
+                rarity = 5 if str(rem["rank"]).endswith("5") else 4
+            else:
+                rarity = loc.get("rarity") or 4
             self.items.append({"id": i, "tag": loc.get("tag") or rem.get("icon", ""), "base": base,
                                "path": i18n.BASE_TO_PATH.get(base, base), "element": el, "rarity": rarity,
                                "owned": i in self.owned, "local": i in self.local})
