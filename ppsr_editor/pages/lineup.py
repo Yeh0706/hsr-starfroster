@@ -346,7 +346,7 @@ class PickerDialog(MessageBoxBase):
         self.flow.setHorizontalSpacing(self.GAP)
         self.flow.setVerticalSpacing(self.GAP)
         sa.setWidget(self.grid_host)
-        sa.setMinimumHeight(470)
+        sa.setFixedHeight(self.GRID_MAX_H)    # 實際高度由 _fit_height() 依視窗大小調整
         sa.viewport().installEventFilter(self)
         self.viewLayout.addWidget(sa, 1)
         self.info = CaptionLabel("")
@@ -384,6 +384,25 @@ class PickerDialog(MessageBoxBase):
         self.grid_host.adjustSize()
 
     TILE_W, GAP = 116, 8
+    GRID_MAX_H, GRID_MIN_H = 470, 160     # 角色格子區的高度上下限
+    CHROME_H = 250                        # 標題＋篩選列＋已選＋按鈕列＋邊距（實測 244）
+    MARGIN_H = 48                         # 對話框上下留白
+
+    def _fit_height(self):
+        """Shrink the grid so the whole dialog fits inside the window (buttons never overlap it)."""
+        sa = self.__dict__.get("grid_scroll")
+        if sa is None or self.height() <= 0:
+            return
+        h = self.height() - self.MARGIN_H - self.CHROME_H
+        sa.setFixedHeight(max(self.GRID_MIN_H, min(self.GRID_MAX_H, h)))
+
+    def showEvent(self, e):
+        self._fit_height()
+        super().showEvent(e)
+
+    def resizeEvent(self, e):
+        super().resizeEvent(e)
+        self._fit_height()
 
     def eventFilter(self, obj, e):
         from PySide6.QtCore import QEvent
